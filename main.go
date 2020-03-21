@@ -4,11 +4,14 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
+var BASE_URL = os.Getenv("BASE_URL")
+
 func get_url(url string, data string) ([]byte, string) {
-	full_url := "http://127.0.0.1:8000/" + url + "/"
+	full_url := BASE_URL + url + "/"
 	resp, err := http.Get(full_url)
 	if err != nil {
 		log.Println(err)
