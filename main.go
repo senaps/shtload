@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"./utils"
+	"shtload/utils"
 )
 
 func get_url(url string, data string) ([]byte, string) {
