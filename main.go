@@ -1,17 +1,17 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"time"
+
+	"./utils"
 )
 
-var BASE_URL = os.Getenv("BASE_URL")
-
 func get_url(url string, data string) ([]byte, string) {
-	full_url := BASE_URL + url + "/"
+	full_url := url + "/"
 	resp, err := http.Get(full_url)
 	if err != nil {
 		log.Println(err)
@@ -28,9 +28,9 @@ func benchmark_url(url string, method string, data string) {
 		failed := 0
 		start := time.Now()
 		for {
-			if method == "get" {
+			if method == utils.GET {
 				_, status = get_url(url, "")
-			} else if method == "post" {
+			} else if method == utils.POST {
 				_, status = get_url(url, data)
 			}
 			finish := time.Now()
@@ -49,6 +49,13 @@ func benchmark_url(url string, method string, data string) {
 }
 
 func main() {
-	defer benchmark_url("ping", "get", "")
+	fmt.Println("here we go!...")
+	confs := utils.ReadConfig()
+	for key, value := range confs {
+		if value == "get" {
+			defer benchmark_url(value, utils.GET, "")
+		}
+	}
+
 	// defer benchmark_url()
 }
