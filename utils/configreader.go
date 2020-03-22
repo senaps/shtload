@@ -3,7 +3,6 @@ package utils
 import (
 	"io/ioutil"
 	"os"
-	"fmt"
 	"gopkg.in/yaml.v2"
 )
 
