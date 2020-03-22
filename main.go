@@ -53,7 +53,6 @@ func main() {
 	confs := utils.ReadConfig()
 	base_url := confs.Base_Url
 	for _, url := range confs.Urls {
-		fmt.Println("base_url is: ", base_url)
 		fmt.Println("url is: ", url)
 	// 	if value == "get" {
 	// 		defer benchmark_url(value, utils.GET, "")
