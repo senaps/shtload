@@ -1,10 +1,10 @@
 package utils
 
 import (
-	"io/ioutil"
-	"os"
 	"fmt"
 	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"os"
 )
 
 var CONFIG_PATH = os.Getenv("CONFIG_PATH")
