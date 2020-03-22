@@ -51,10 +51,13 @@ func benchmark_url(url string, method string, data string) {
 func main() {
 	fmt.Println("here we go!...")
 	confs := utils.ReadConfig()
-	for key, value := range confs {
-		if value == "get" {
-			defer benchmark_url(value, utils.GET, "")
-		}
+	base_url := confs.Base_Url
+	for _, url := range confs.Urls {
+		fmt.Println("base_url is: ", base_url)
+		fmt.Println("url is: ", url)
+	// 	if value == "get" {
+	// 		defer benchmark_url(value, utils.GET, "")
+	// 	}
 	}
 
 	// defer benchmark_url()
