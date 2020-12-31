@@ -5,7 +5,7 @@ var POST = "post"
 
 type Config struct {
 	
-	Base_Url   string "base_url"
+	BaseUrl   string "base_url"
 	Urls [] struct{
 		Name string "name"
 		Route string "route"

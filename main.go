@@ -11,9 +11,10 @@ import (
 
 var BASE_URL string
 
-func get_url(url string, data string) ([]byte, string) {
+func getUrl(url string, data string) ([]byte, string) {
 	full_url := BASE_URL + url
 	resp, err := http.Get(full_url)
+  
 	if err != nil {
 		log.Println(err)
 	}
@@ -22,7 +23,7 @@ func get_url(url string, data string) ([]byte, string) {
 	return body, resp.Status
 }
 
-func benchmark_url(name string, url string, method string, data string) {
+func benchmarkUrl(url string, method string, data string) {
 	for {
 		status := ""
 		success := 0
@@ -30,9 +31,9 @@ func benchmark_url(name string, url string, method string, data string) {
 		start := time.Now()
 		for {
 			if method == utils.GET {
-				_, status = get_url(url, "")
+				_, status = getUrl(url, "")
 			} else if method == utils.POST {
-				_, status = get_url(url, data)
+				_, status = getUrl(url, data)
 			}
 			finish := time.Now()
 			elapsed := finish.Sub(start).Seconds()
@@ -55,9 +56,9 @@ func main() {
 	BASE_URL = confs.Base_Url
 	for _, url := range confs.Urls {
 		if url.Method == "get" {
-			defer benchmark_url(url.Name, url.Route, utils.GET, "")
+			defer benchmarkUrl(url.Name, url.Route, utils.GET, "")
 		}
 	}
 
-	// defer benchmark_url()
+	// defer benchmarkUrl()
 }
