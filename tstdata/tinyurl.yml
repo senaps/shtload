@@ -1,8 +1,8 @@
-base_url: http://127.0.0.1:8000/
-address:
-    - index: 
-        route: /
-        method: get
-    - ping:
-        route: /ping/
-        method: get
+base_url: http://127.0.0.1:8000
+urls:
+    - name:  index
+      route: /
+      method: get
+    - name: ping
+      route: /ping/
+      method: get

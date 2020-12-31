@@ -24,6 +24,5 @@ func ReadConfig() Config {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(": ", conf.Urls)
 	return conf
 }

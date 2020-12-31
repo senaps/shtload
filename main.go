@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,9 +9,12 @@ import (
 	"shtload/utils"
 )
 
+var BASE_URL string
+
 func getUrl(url string, data string) ([]byte, string) {
-	fullUrl := url + "/"
-	resp, err := http.Get(fullUrl)
+	full_url := BASE_URL + url
+	resp, err := http.Get(full_url)
+  
 	if err != nil {
 		log.Println(err)
 	}
@@ -44,20 +46,18 @@ func benchmarkUrl(url string, method string, data string) {
 				break
 			}
 		}
-		log.Println("success: ", success, "failed: ", failed)
+		log.Println("success:", success, "failed:", failed, "url:", name)
 	}
 }
 
 func main() {
-	fmt.Println("here we go!...")
+	log.Println("starting the shtload...")
 	confs := utils.ReadConfig()
-	base_url := confs.BaseUrl
+	BASE_URL = confs.Base_Url
 	for _, url := range confs.Urls {
-		fmt.Println("base_url is: ", base_url)
-		fmt.Println("url is: ", url)
-		// 	if value == "get" {
-		// 		defer benchmarkUrl(value, utils.GET, "")
-		// 	}
+		if url.Method == "get" {
+			defer benchmarkUrl(url.Name, url.Route, utils.GET, "")
+		}
 	}
 
 	// defer benchmarkUrl()
